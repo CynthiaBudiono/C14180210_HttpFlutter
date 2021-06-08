@@ -3,22 +3,27 @@ import 'package:http/http.dart' as http;
 // ignore: camel_case_types
 
 class movieAPI {
-  int myid;
-  String myemail;
+  String mytitle;
+  String myoverview;
+  String tanggalrelease;
+  int runtime;
+  List<String> genre;
+  double popularity;
 
   movieAPI({
-    this.myid, this.myemail
+    this.mytitle, this.myoverview, this.tanggalrelease, this.runtime, this.genre, this.popularity
     });
   
   // contructor tpi return sesuatu
   factory movieAPI.createData(Map<String, dynamic> object){
-    return movieAPI(myid: object['id'], myemail: object['email']);
+    return movieAPI(mytitle: object['original_title'], myoverview: object['overview'], tanggalrelease: object['release_date'], runtime: object['runtime'], genre: object['genre'], popularity: object['popularity']);
   }
 
   static Future<movieAPI> connectToAPI() async {
     // String URLapi = 'https://reqres.in/api/users/2';
 
-    String URLapi = 'https://reqres.in/api/users?page=2';
+    // String URLapi = 'https://reqres.in/api/users?page=2';
+    String URLapi = 'https://api.themoviedb.org/3/movie/550?api_key=5e4330e3cbe5f4fadddbccd443dd7e96';
     var apiResult = await http.get(Uri.parse(URLapi));
 
     var jsonObject = json.decode(apiResult.body);
@@ -28,7 +33,7 @@ class movieAPI {
     // var data = (jsonObject as Map<Object, dynamic>)['data'][1];
 
     // return movieAPI.createData(data);
-    var data = (jsonObject as Map<Object, dynamic>)['data'][1];
+    var data = (jsonObject as Map<Object, dynamic>);
 
     return movieAPI.createData(data);
 

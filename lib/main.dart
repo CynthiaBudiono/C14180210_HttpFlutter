@@ -14,14 +14,16 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   TextEditingController _txtsearch = new TextEditingController();
-  // List<Movie> film = new List();
+  List film = new List();
   // Movie baru = Movie("aa", 200);
   // film.add(baru);
   // film.add(new Movie("aaa", 0));
   // film.push("aa", 2000);
-
+  
   _MyAppState() {
-    this.getMovie();
+    // for(int i = 550;i< 560; i++){
+      getMovie();
+    // }
   }
 
   // List<movieAPI> datafilm = null;
@@ -40,6 +42,7 @@ class _MyAppState extends State<MyApp> {
       // for(int i =0; i< hasil.length;i++){}
       // print(hasil.);
       user= hasil;
+      film.add(user);
       setState(() {
               
             });
@@ -70,19 +73,41 @@ class _MyAppState extends State<MyApp> {
                     return Center(
                       child: Card(
                         color: Colors.lightBlue,
-                        child: Center(
+                        child: Container(
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: <Widget>[
                               Text(
-                                user.myemail,
+                                user.mytitle,
                                 // datafilm[index].myemail,
+                                style: new TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 25),
+                              ),
+                              Text(
+                                user.myoverview,
                                 style: new TextStyle(color: Colors.black),
                               ),
+                              Text(
+                                "Release Date : " + user.tanggalrelease,
+                                style: new TextStyle(color: Colors.black),
+                              ),
+                              Text(
+                                "Run Time : " + user.runtime.toString() + " Menit",
+                                style: new TextStyle(color: Colors.black),
+                              ),
+                              // List.generate(user.genre.length, (index){
+                              //   Text(
+                              //   user.myoverview,
+                              //   style: new TextStyle(color: Colors.black),
+                              // );
+                              // }),
                               // Text(
-                              //   film.release.toString(),
+                              //   user.genre[1],
                               //   style: new TextStyle(color: Colors.black),
                               // ),
+                              Text(
+                                "Popularity : " + user.popularity.toString(),
+                                style: new TextStyle(color: Colors.black),
+                              ),
                             ])),
                       ),
                     );
