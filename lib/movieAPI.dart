@@ -19,11 +19,11 @@ class movieAPI {
     return movieAPI(mytitle: object['original_title'], myoverview: object['overview'], tanggalrelease: object['release_date'], runtime: object['runtime'], genre: object['genre'], popularity: object['popularity']);
   }
 
-  static Future<movieAPI> connectToAPI() async {
+  static Future<movieAPI> connectToAPI(int idku) async {
     // String URLapi = 'https://reqres.in/api/users/2';
 
     // String URLapi = 'https://reqres.in/api/users?page=2';
-    String URLapi = 'https://api.themoviedb.org/3/movie/550?api_key=5e4330e3cbe5f4fadddbccd443dd7e96';
+    String URLapi = 'https://api.themoviedb.org/3/movie/'+idku.toString()+'?api_key=5e4330e3cbe5f4fadddbccd443dd7e96';
     var apiResult = await http.get(Uri.parse(URLapi));
 
     var jsonObject = json.decode(apiResult.body);
